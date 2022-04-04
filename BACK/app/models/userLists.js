@@ -23,9 +23,7 @@ const userListsDataMapper = {
 
     async findAllBooksInFavorite(userId) {
         const result = await client.query(
-            'SELECT * FROM user_book_in_favorite WHERE user_id = $1',
-            [userId],
-        );
+            'SELECT * FROM user_book_in_favorite WHERE user_id = $1', [userId]);
 
         return result.rows[0];
     },
