@@ -1,6 +1,5 @@
 const userListsDataMapper = require('../models/userLists');
 const { getBookInformation } = require('../middlewares/getBookInformation');
-// const ApiError = require('../errors/apiError');
 
 module.exports = {
     async getAllBooksInLibrary(req, res) {
@@ -11,8 +10,8 @@ module.exports = {
             return res.json('{ no book in library }');
         }
 
-        const books = await getBookInformation(library.book_in_library);
-        library.book_in_library = books;
+        const books = await getBookInformation(library.books);
+        library.books = books;
 
         return res.json(library);
     },
@@ -25,8 +24,8 @@ module.exports = {
             return res.json('{ no book in favorite }');
         }
 
-        const books = await getBookInformation(favorites.book_in_favorite);
-        favorites.book_in_favorite = books;
+        const books = await getBookInformation(favorites.books);
+        favorites.books = books;
 
         return res.json(favorites);
     },
@@ -39,8 +38,8 @@ module.exports = {
             return res.json('{ no book in alert }');
         }
 
-        const books = await getBookInformation(alerts.book_in_alert);
-        alerts.book_in_alert = books;
+        const books = await getBookInformation(alerts.books);
+        alerts.books = books;
 
         return res.json(alerts);
     },

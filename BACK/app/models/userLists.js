@@ -14,7 +14,7 @@ const client = require('../config/database');
 
 const userListsDataMapper = {
     async findAllBooksInLibrary(userId) {
-        const result = await client.query('SELECT * FROM user_book_in_library WHERE id = $1', [
+        const result = await client.query('SELECT * FROM user_book_in_library WHERE user_id = $1', [
             userId,
         ]);
 
@@ -22,15 +22,16 @@ const userListsDataMapper = {
     },
 
     async findAllBooksInFavorite(userId) {
-        const result = await client.query('SELECT * FROM user_book_in_favorite WHERE id = $1', [
-            userId,
-        ]);
+        const result = await client.query(
+            'SELECT * FROM user_book_in_favorite WHERE user_id = $1',
+            [userId],
+        );
 
         return result.rows[0];
     },
 
     async findAllBooksInAlert(userId) {
-        const result = await client.query('SELECT * FROM user_book_in_alert WHERE id = $1', [
+        const result = await client.query('SELECT * FROM user_book_in_alert WHERE user_id = $1', [
             userId,
         ]);
 

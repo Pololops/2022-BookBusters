@@ -6,9 +6,11 @@ const fs = require('fs');
 
 const config = {
     connectionString: process.env.PG_URL,
+    /*
     ssl: {
         rejectUnauthorized: false,
     },
+    */
 };
 
 const client = new Client(config);
