@@ -1,6 +1,7 @@
 const bookDataMapper = require('../models/book');
 const { ApiError } = require('../middlewares/handleError');
 const bookReformatter = require('../services/bookReformatter');
+const getBooksByIdsTEMPORARY = require('../services/getBooksByIdsTEMPORARY');
 const debug = require('debug')('bookController');
 
 module.exports = {
@@ -54,9 +55,53 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async getBooksIdsAroundMe(req, res) {
-        const books = await bookDataMapper.findBooksIdAround(req.body.location, req.body.radius);
-        return res.json(books);
+        const booksAroundMe = await bookDataMapper.findBooksIdAround(req.body.location, req.body.radius);
+
+        debug('BOOK AROUND ME', booksAroundMe);
+        const result = [];
+        const promiseToSolve=[];
+        let bookArray=[];
+
+        booksAroundMe.forEach(element=> {
+            debug('book ids', element.book_ids);
+            promiseToSolve.push(getBooksByIdsTEMPORARY.getBooksWithIdsTEMPORARY(element.book_ids));
+
+        })
+        let books = await Promise.all(promiseToSolve);
+        debug('books après foreach', books);
+
+        books = books[0].concat(books[1]);
+        debug('books concat', books);
+
+
+        booksAroundMe.forEach(element=> {
+            debug('IDS à chercher', element.book_ids)
+            element.book_ids.forEach(book_id => {
+                debug('ID à chercher', book_id)
+                let book= books.find(book =>
+                    book_id===book.id
+                 )
+                 debug('book trouvé avec id', book)
+                 bookArray.push({
+                     ...book,
+                 })
+            })
+
+            result.push({
+                books : bookArray,
+                loc: element.loc
+            })
+            bookArray=[];
+            debug('bookArray', bookArray)
+            debug('result dans forEach', result);
+        })
+        debug('result en dehors du forEach', result);
+
+
+        return res.json(result);
     },
+
+
 
     async getBooksWithIds(req, res) {
         debug('Req.query.books = ', req.query.books);
