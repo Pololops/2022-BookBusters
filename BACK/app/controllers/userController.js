@@ -75,6 +75,21 @@ module.exports = {
             req.body.password = encryptedPassword;
 
             const savedUser = await userDataMapper.insert(req.body);
+            // confirmation email
+            jwt.sign(
+                {
+                    userId: savedUser.id,
+                },
+                process.env.SECRET_TOKEN_KEY,
+                { expiresIn: '1d' },
+                (err, emailToken) => {
+                    const url = `http://localhost:5000/v1/confirmation/${emailToken}`;
+                    transporter.senMail({
+                        to:savedUser.email,
+                        subject:`Confirmation de l'adresse email`,
+                        html:`Merci de cliquer sur le lien suivant pour confirmer votre email:<a href=`${url}`>${url}</a>`
+                    })
+            )
             return res.json(savedUser);
         }
     },
