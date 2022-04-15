@@ -17,6 +17,7 @@ import Account from "../../pages/Account";
 import Credits from "../../pages/Credits";
 import Favorites from "../../pages/Favorites";
 import Library from "../../pages/Library";
+import Scan from '../../pages/Scan';
 import Contact from "../../pages/Contact";
 import MyAlerts from "../../pages/MyAlerts";
 import SignInSide from "../../pages/SignIn";
@@ -25,6 +26,7 @@ import SignUp from "../../pages/SignUp";
 import AroundMe from "../../pages/AroundMe";
 import AuthenticatedRoute from "../AuthenticatedRoute";
 import Alert from "../Alert/Alert";
+
 
 import { AuthProvider } from "../../contexts/AuthContext";
 import { AlertProvider } from "../../contexts/AlertContext";
@@ -53,48 +55,65 @@ themeOptions = responsiveFontSizes(themeOptions);
 
 function App() {
   return (
-    <ThemeProvider theme={themeOptions}>
-      <CssBaseline />
-      <BrowserRouter>
-        <AuthProvider>
-          <AlertProvider>
-            <Routes>
-              {/* Routes toujours accessibles */}
-              <Route path="/" element={<Home />} />
-              <Route path="*" element={<Error />} />
-              <Route path="/Credits" element={<Credits />} />
-              <Route path="/Contact" element={<Contact />} />
-              <Route path="/AroundMe" element={<AroundMe />} />
-              <Route path="/SearchResults" element={<SearchResults />} />
-              {/* Routes avec JWT*/}
-              <Route
-                element={
-                  <AuthenticatedRoute redirect="/SignIn" connectedOnly={true} />
-                }
-              >
-                <Route path="/Account" element={<Account />} />
-                <Route path="/myAlerts" element={<MyAlerts />} />
-                <Route path="/Favorites" element={<Favorites />} />
-                <Route path="/Library" element={<Library />} />
-              </Route>
+      <ThemeProvider theme={themeOptions}>
+          <CssBaseline />
+          <BrowserRouter>
+              <AuthProvider>
+                  <AlertProvider>
+                      <Routes>
+                          {/* Routes toujours accessibles */}
+                          <Route path='/' element={<Home />} />
+                          <Route path='*' element={<Error />} />
+                          <Route path='/Credits' element={<Credits />} />
+                          <Route path='/Contact' element={<Contact />} />
+                          <Route path='/AroundMe' element={<AroundMe />} />
+                          <Route
+                              path='/SearchResults'
+                              element={<SearchResults />}
+                          />
+                          <Route
+                              path='/Scan'
+                              element={<Scan />}
+                          />
 
-              {/* Routes SANS JWT* le problème se situe dans la lecture en FALSE après connexion/}*/}
-              <Route
-                element={
-                  <AuthenticatedRoute redirect="/" connectedOnly={false} />
-                }
-              >
-                {/* <Route path="/ForgotPassword" element={<ForgotPassword />} />*/}
-                <Route path="/SignIn" element={<SignInSide />} />
-                <Route path="/SignUp" element={<SignUp />} />
-              </Route>
-            </Routes>
+                          {/* Routes avec JWT*/}
+                          <Route
+                              element={
+                                  <AuthenticatedRoute
+                                      redirect='/SignIn'
+                                      connectedOnly={true}
+                                  />
+                              }
+                          >
+                              <Route path='/Account' element={<Account />} />
+                              <Route path='/myAlerts' element={<MyAlerts />} />
+                              <Route
+                                  path='/Favorites'
+                                  element={<Favorites />}
+                              />
+                              <Route path='/Library' element={<Library />} />
+                          </Route>
 
-            <Alert />
-          </AlertProvider>
-        </AuthProvider>
-      </BrowserRouter>
-    </ThemeProvider>
+                          {/* Routes SANS JWT* le problème se situe dans la lecture en FALSE après connexion/}*/}
+                          <Route
+                              element={
+                                  <AuthenticatedRoute
+                                      redirect='/'
+                                      connectedOnly={false}
+                                  />
+                              }
+                          >
+                              {/* <Route path="/ForgotPassword" element={<ForgotPassword />} />*/}
+                              <Route path='/SignIn' element={<SignInSide />} />
+                              <Route path='/SignUp' element={<SignUp />} />
+                          </Route>
+                      </Routes>
+
+                      <Alert />
+                  </AlertProvider>
+              </AuthProvider>
+          </BrowserRouter>
+      </ThemeProvider>
   );
 }
 

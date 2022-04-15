@@ -98,12 +98,24 @@ export async function searchBooks(
     console.log("error");
   }
 }
-// q=${search}&limit=${limit}&start=${start}
+
+export async function searchISBN(isbn) {
+    try {
+        const response = await axios.get(
+            `/v1/book/isbn/${isbn}`,
+        );
+        return response;
+    } catch (error) {
+        console.log('error');
+    }
+}
+
 export const fetchApi = {
-  connectUser,
-  registerUser,
-  searchBooks,
-  usersAroundMe,
+    connectUser,
+    registerUser,
+    searchBooks,
+    usersAroundMe,
+    searchISBN,
 };
 
 export default fetchApi;
