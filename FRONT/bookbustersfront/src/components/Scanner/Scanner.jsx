@@ -3,16 +3,19 @@ import { Box } from "@mui/system";
 
 import './style.scss';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 
 // import Book from "../Book/Book";
 import { searchBookByISBN } from '../../api/fetchApi';
 import BookDetailModal from "../BookDetailModal/BookDetailModal";
 
+import bookContext from "../../contexts/BookContext";
 
 const Scanner = () => {
     const [scannedCodes, setScannedCodes] = useState([]);
+    const { setOpenedBook } = useContext(bookContext);
+    
 
     useEffect(() => {
         async function onScanSuccess(decodedText, decodedResult) {
@@ -24,6 +27,8 @@ const Scanner = () => {
             const response = await searchBookByISBN(isbn);
             console.log('ISBN readed : ', isbn);
             console.log('Found book : ', response.data);
+            setOpenedBook(response.data);          
+
         }
 
         function onScanError(qrCodeError) {
@@ -52,7 +57,7 @@ const Scanner = () => {
         <div id="scanner">
             <div id='reader'></div>
         </div>
-        <BookDetailModal />
+       <BookDetailModal />
       </Box>
     );
 };
