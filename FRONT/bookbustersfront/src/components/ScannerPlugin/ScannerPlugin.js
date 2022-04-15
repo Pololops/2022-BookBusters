@@ -4,8 +4,6 @@ import React from 'react';
 import Html5QrcodePlugin from './Html5QrcodePlugin.jsx';
 import { searchISBN } from '../../api/fetchApi';
 
-
-
 class ScannerPlugin extends React.Component {
     constructor(props) {
         super(props);

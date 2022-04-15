@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from '../components/Header/Header';
 import ScannerPlugin from '../components/ScannerPlugin/ScannerPlugin';
+import Book from '../Book/Book';
 import { useNavigate } from 'react-router-dom';
 
 

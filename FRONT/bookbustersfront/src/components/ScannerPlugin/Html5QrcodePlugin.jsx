@@ -19,24 +19,24 @@ class Html5QrcodePlugin extends React.Component {
     componentDidMount() {
         // Creates the configuration object for Html5QrcodeScanner.
         function createConfig(props) {
-            var config = {};
+            const config = {};
             if (props.fps) {
-            config.fps = props.fps;
+                config.fps = props.fps;
             }
             if (props.qrbox) {
-            config.qrbox = props.qrbox;
+                config.qrbox = props.qrbox;
             }
             if (props.aspectRatio) {
-            config.aspectRatio = props.aspectRatio;
+                config.aspectRatio = props.aspectRatio;
             }
             if (props.disableFlip !== undefined) {
-            config.disableFlip = props.disableFlip;
+                config.disableFlip = props.disableFlip;
             }
             return config;
         }
 
-        var config = createConfig(this.props);
-        var verbose = this.props.verbose === true;
+        const config = createConfig(this.props);
+        const verbose = this.props.verbose === true;
 
         // Suceess callback is required.
         if (!(this.props.qrCodeSuccessCallback )) {
