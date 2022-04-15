@@ -1,29 +1,25 @@
 import { Box } from "@mui/system";
-// import { Button, ButtonGroup, Container } from "@mui/material";
 
 import './style.scss';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 
-// import Book from "../Book/Book";
 import { searchBookByISBN } from '../../api/fetchApi';
 import BookDetailModal from "../BookDetailModal/BookDetailModal";
 
+import bookContext from "../../contexts/BookContext";
 
 const Scanner = () => {
-    const [scannedCodes, setScannedCodes] = useState([]);
-
+    const { setOpenedBook } = useContext(bookContext);
+    
     useEffect(() => {
         async function onScanSuccess(decodedText, decodedResult) {
             const isbn = decodedText
 
-            // To close the QR code scannign after the result is found
-            html5Qrcode.clear();
-
             const response = await searchBookByISBN(isbn);
-            console.log('ISBN readed : ', isbn);
-            console.log('Found book : ', response.data);
+
+            setOpenedBook(response.data);  
         }
 
         function onScanError(qrCodeError) {
@@ -32,14 +28,15 @@ const Scanner = () => {
         }
 
         const config =  { 
-            fps: 10,
+            facingMode: "environment",
+            fps: 60,
             qrbox: { width: 250, height: 250 },
-            experimentalFeatures: {
-                useBarCodeDetectorIfSupported: true
-            }
-        };
+            disableFlip: false,
+            rememberLastUsedCamera: true,
+            Html5QrcodeSupportedFormats: 'EAN_13',
+        }
 
-        let html5Qrcode = new Html5QrcodeScanner(
+        const html5Qrcode = new Html5QrcodeScanner(
             'reader',
             config,
             false,
@@ -49,11 +46,11 @@ const Scanner = () => {
 
     return (
         <Box>
-        <div id="scanner">
-            <div id='reader'></div>
-        </div>
-        <BookDetailModal />
-      </Box>
+            <div id="scanner">
+                <div id='reader'></div>
+            </div>
+            <BookDetailModal />
+        </Box>
     );
 };
 
