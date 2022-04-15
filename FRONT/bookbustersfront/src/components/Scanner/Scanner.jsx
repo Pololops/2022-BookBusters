@@ -22,7 +22,7 @@ const Scanner = () => {
             const isbn = decodedText
 
             // To close the QR code scannign after the result is found
-            html5Qrcode.clear();
+            //html5Qrcode.clear();
 
             const response = await searchBookByISBN(isbn);
             console.log('ISBN readed : ', isbn);
