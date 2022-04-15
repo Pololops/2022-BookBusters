@@ -8,6 +8,7 @@ import "@fontsource/roboto";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Home from "../../pages/Home";
+import Scan from '../../pages/Scan';
 import Error from "../../pages/Error";
 import Account from "../../pages/Account";
 import Credits from "../../pages/Credits";
@@ -64,6 +65,7 @@ function App() {
                 <Route path="/Contact" element={<Contact />} />
                 <Route path="/AroundMe" element={<AroundMe />} />
                 <Route path="/SearchResults" element={<SearchResults />} />
+                <Route path="/scan" element={<Scan />} />
                 {/* Routes avec JWT*/}
                 <Route
                   element={
@@ -73,10 +75,12 @@ function App() {
                     />
                   }
                 >
-                  <Route path="/Account" element={<Account />} />
-                  <Route path="/myAlerts" element={<MyAlerts />} />
-                  <Route path="/Favorites" element={<Favorites />} />
-                  <Route path="/Library" element={<Library />} />
+                <Route path="/Account" element={<Account />} />
+                <Route path="/myAlerts" element={<MyAlerts />} />
+                <Route path="/Favorites" element={<Favorites />} />
+                <Route path="/Library" element={<Library />} />
+                <Route path="/SearchResults" element={<SearchResults />} />
+                <Route path="/Library" element={<Library />} />
                 </Route>
 
                 {/* Routes SANS JWT* le problème se situe dans la lecture en FALSE après connexion/}*/}
