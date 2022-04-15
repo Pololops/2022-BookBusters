@@ -1,10 +1,6 @@
 //* Import des composants thématique de MUI
 import { CssBaseline } from "@mui/material";
-import {
-  createTheme,
-  ThemeProvider,
-  responsiveFontSizes,
-} from "@mui/material/styles";
+import { createTheme, ThemeProvider, responsiveFontSizes } from "@mui/material/styles";
 import "@fontsource/rubik-wet-paint";
 import "@fontsource/roboto";
 
@@ -31,6 +27,7 @@ import Alert from "../Alert/Alert";
 import { AuthProvider } from "../../contexts/AuthContext";
 import { AlertProvider } from "../../contexts/AlertContext";
 import SearchResults from "../SearchResults/SearchResults";
+import { BookProvider } from "../../contexts/BookContext";
 
 let themeOptions = createTheme({
   palette: {
