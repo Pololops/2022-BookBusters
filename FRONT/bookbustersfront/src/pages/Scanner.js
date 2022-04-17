@@ -5,10 +5,11 @@ import '../styles/Scan.scss';
 import React, { useEffect, useContext } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 
-import { searchBookByISBN } from '../../api/fetchApi';
-import BookDetailModal from "../BookDetailModal/BookDetailModal";
+import { searchBookByISBN } from '../api/fetchApi';
+import BookDetailModal from "../components/BookDetailModal/BookDetailModal";
 
-import bookContext from "../../contexts/BookContext";
+import bookContext from "../contexts/BookContext";
+import Header from "../components/Header/Header";
 
 const Scanner = () => {
     const { setOpenedBook } = useContext(bookContext);
