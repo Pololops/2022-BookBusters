@@ -59,7 +59,7 @@ const mailer = {
             text: "BookBusters", // plain text body
             html: `<b>Cher(e) BookBuster</b><br><b>${message.user_fullname} est interessé par votre livre ${message.book_title}. Voici son message :  ${message.message}. Vous pouvez le contacter par mail à l'adresse suivante : ${message.user_email} <br><b>L'équipe BookBusters</b>`, // html body
         });
-    }
+    },
 };
 
 // service mail every day at 2 am for the expired books.
@@ -95,7 +95,7 @@ cron.schedule('0 0 2 * *', async () => {
                             to: `${user.email}`, // list of receivers
                             subject: "Votre livre est-il toujours dispo ?", // Subject line
                             text: "BookBusters", // plain text body
-                            html: `<b>Cher(e) BookBuster,</b><br><b>Le livre "${book.title}" de "${book.author} est en donation chez BookBusters. Est il toujours disponible ? </b><br><b>Si le livre est toujours en donation, cliquez sur le lien suivant.</b><br><b>${process.env.BASE_URL}/donation/${emailToken}</b><br><b>Si le livre n'est plus dispo, pas de souci. Dans quelques jours le livre sera retiré automatiquement de notre site</b><br><b>Et surtout, n'hésitez pas à nous apporter d'autres livres sur BookBusters !</b><br><b>L'équipe BookBusters</b>`, // html body
+                            html: `<b>Cher(e) BookBuster,</b><br><b>Le livre "${book.title}" de "${book.author} est en donation chez BookBusters. Est il toujours disponible ? </b><br><b>Si le livre est toujours en donation, cliquez sur le lien suivant.</b><br><b>${process.env.BASE_URL}/DonationRenewing?token=${emailToken}</b><br><b>Si le livre n'est plus dispo, pas de souci. Dans quelques jours le livre sera retiré automatiquement de notre site</b><br><b>Et surtout, n'hésitez pas à nous apporter d'autres livres sur BookBusters !</b><br><b>L'équipe BookBusters</b>`, // html body
                         }),
                     );
                 },

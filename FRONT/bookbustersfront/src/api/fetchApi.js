@@ -148,6 +148,21 @@ export async function myAlertsBooks(setAlert) {
   }
 }
 
+/*export const donationRenewing = (token) => {
+  // permet de recuperer les user a coter de nous sur la map
+  //console.log(latitude, longitude);
+
+  axios
+    .post(`/v1/donation/${token}`, {
+      location: `(${latitude},${longitude})`,
+      radius: "200",
+    })
+    .then((response) => setpositionUser(response.data))
+    .catch((error) => {
+      console.log(error);
+    });
+};
+*/
 export const fetchApi = {
   connectUser,
   registerUser,
