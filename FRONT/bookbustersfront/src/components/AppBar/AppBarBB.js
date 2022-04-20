@@ -14,7 +14,6 @@ import SearchBar from '../SearchBar/SearchBar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import authContext from '../../contexts/AuthContext';
 import scannerIcon from '../../assets/img/scanner-icon.svg';
-import { convertLength } from '@mui/material/styles/cssUtils';
 
 const pages = [
     {
@@ -145,9 +144,7 @@ const ResponsiveAppBar = () => {
                     flexGrow: 1,
                 }}
             >
-                <Toolbar disableGutters
-                    style={{flexGrow: 1}}
-                >
+                <Toolbar disableGutters style={{ flexGrow: 1 }}>
                     <Typography
                         variant='h6'
                         noWrap
@@ -189,11 +186,7 @@ const ResponsiveAppBar = () => {
                         )}
                     </Typography>
 
-                    <Box
-                        sx={{
-                            display: { xs: 'flex', md: 'none' },
-                        }}
-                    >
+                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size='large'
                             aria-label='account of current user'
@@ -302,59 +295,71 @@ const ResponsiveAppBar = () => {
                     </Box>
 
                     {jwt && (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Compte utilisateur">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft: "15px" }}>
-                  <AccountCircleIcon fontSize="large" style={{ color: "white" }} />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting, index) => (
-                  <MenuItem
-                    key={`MenuItem-banana-NavBar--${index}`}
-                    onClick={() => {
-                      if (setting.action) {
-                        setting.action();
-                      }
-                      handleCloseUserMenu();
-                    }}
-                    sx={setting.sx}
-                  >
-                    {setting.href && (
-                      <Link style={setting.style} to={setting.href}>
-                        <Typography sx={setting.sx} textAlign="center">
-                          {setting.label}
-                        </Typography>
-                      </Link>
-                    )}
-                    {!setting.href && (
-                      <Typography sx={setting.sx} textAlign="center">
-                        {setting.label}
-                      </Typography>
-                    )}
-                    </MenuItem>
-                ))}
-                </Menu>
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title='Compte utilisateur'>
+                                <IconButton
+                                    onClick={handleOpenUserMenu}
+                                    sx={{ p: 0, marginLeft: '15px' }}
+                                >
+                                    <AccountCircleIcon
+                                        fontSize='large'
+                                        style={{ color: 'white' }}
+                                    />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id='menu-appbar'
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                {settings.map((setting, index) => (
+                                    <MenuItem
+                                        key={`MenuItem-banana-NavBar--${index}`}
+                                        onClick={() => {
+                                            if (setting.action) {
+                                                setting.action();
+                                            }
+                                            handleCloseUserMenu();
+                                        }}
+                                        sx={setting.sx}
+                                    >
+                                        {setting.href && (
+                                            <Link
+                                                style={setting.style}
+                                                to={setting.href}
+                                            >
+                                                <Typography
+                                                    sx={setting.sx}
+                                                    textAlign='center'
+                                                >
+                                                    {setting.label}
+                                                </Typography>
+                                            </Link>
+                                        )}
+                                        {!setting.href && (
+                                            <Typography
+                                                sx={setting.sx}
+                                                textAlign='center'
+                                            >
+                                                {setting.label}
+                                            </Typography>
+                                        )}
+                                    </MenuItem>
+                                ))}
+                            </Menu>
                         </Box>
-              
-                )}
-
-          
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>
