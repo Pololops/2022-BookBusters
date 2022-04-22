@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7673c781.css",
+    "main.js": "/static/js/main.666e094e.js",
+    "static/js/787.8baea523.chunk.js": "/static/js/787.8baea523.chunk.js",
+    "static/media/library.jpg": "/static/media/library.1626dd5c0b8d2b08f102.jpg",
+    "static/media/rubik-wet-paint-all-400-normal.woff": "/static/media/rubik-wet-paint-all-400-normal.2887bcd7223f06a4699a.woff",
+    "static/media/BookBustersTeam.jpg": "/static/media/BookBustersTeam.b7d4df62b89b9422b7dd.jpg",
+    "static/media/rubik-wet-paint-latin-400-normal.woff2": "/static/media/rubik-wet-paint-latin-400-normal.7b803f179fec6a09fe51.woff2",
+    "static/media/roboto-all-400-normal.woff": "/static/media/roboto-all-400-normal.376ea5d93f71583052f6.woff",
+    "static/media/logo_bb.png": "/static/media/logo_bb.f83af46bcf2d446d5a25.png",
+    "static/media/rubik-wet-paint-cyrillic-400-normal.woff2": "/static/media/rubik-wet-paint-cyrillic-400-normal.49cca1565e4a4cb40d06.woff2",
+    "static/media/rubik-wet-paint-latin-ext-400-normal.woff2": "/static/media/rubik-wet-paint-latin-ext-400-normal.f11549875359de7967c6.woff2",
+    "static/media/rubik-wet-paint-cyrillic-ext-400-normal.woff2": "/static/media/rubik-wet-paint-cyrillic-ext-400-normal.d760205418159bbcbc06.woff2",
+    "static/media/hanged_monster.png": "/static/media/hanged_monster.625e936a2a09a76c5235.png",
+    "static/media/white-instagram.png": "/static/media/white-instagram.fa643738c6e72e21f76d.png",
+    "static/media/rubik-wet-paint-hebrew-400-normal.woff2": "/static/media/rubik-wet-paint-hebrew-400-normal.36f5c9f4c8945a396d47.woff2",
+    "static/media/roboto-latin-400-normal.woff2": "/static/media/roboto-latin-400-normal.4673b4537a84c7f7a130.woff2",
+    "static/media/linkedin.png": "/static/media/linkedin.f6767345f6d31c8b13ee.png",
+    "static/media/roboto-cyrillic-ext-400-normal.woff2": "/static/media/roboto-cyrillic-ext-400-normal.493afe7ae8ecfe268800.woff2",
+    "static/media/github.png": "/static/media/github.65a029dd14ae5c405656.png",
+    "static/media/logo_bb_reserve.svg": "/static/media/logo_bb_reserve.2e7fdb4c6fa8b3d4ba2ef93a83d97aea.svg",
+    "static/media/roboto-latin-ext-400-normal.woff2": "/static/media/roboto-latin-ext-400-normal.c3dcdbd5bb4d4af80817.woff2",
+    "static/media/roboto-cyrillic-400-normal.woff2": "/static/media/roboto-cyrillic-400-normal.5e493812deabd1d01e60.woff2",
+    "static/media/roboto-greek-400-normal.woff2": "/static/media/roboto-greek-400-normal.1cbfc636c911faa4d0ca.woff2",
+    "static/media/roboto-vietnamese-400-normal.woff2": "/static/media/roboto-vietnamese-400-normal.c0bec65d01f776c00c91.woff2",
+    "static/media/scanner-icon.svg": "/static/media/scanner-icon.2a8f4dd9bdd02edad0c6029fcc76b9f4.svg",
+    "static/media/logoBusters.svg": "/static/media/logoBusters.592dd3285e3b7a3fd208d7b98aa59805.svg",
+    "static/media/roboto-greek-ext-400-normal.woff2": "/static/media/roboto-greek-ext-400-normal.bb723e8458c9c653e505.woff2",
+    "index.html": "/index.html",
+    "main.7673c781.css.map": "/static/css/main.7673c781.css.map",
+    "main.666e094e.js.map": "/static/js/main.666e094e.js.map",
+    "787.8baea523.chunk.js.map": "/static/js/787.8baea523.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7673c781.css",
+    "static/js/main.666e094e.js"
+  ]
+}
