@@ -12,7 +12,6 @@ const validISBN10 = new RegExp(/^\d{9}(\d||x||X)$/);
 const google = {
     async findBookByISBN(isbn) {
         const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&printType=books`;
-
         const response = await fetch(url);
         const json = await response.json();
 
@@ -25,24 +24,31 @@ const google = {
             return undefined;
         }
 
-        //If at least one answer, only the first one is return
+        //If at least one answer, find the good one, looking at the one who has correct ISBN
         if (json.totalItems >= 1) {
             const foundBook = json.items.find((item) => {
                 const industryIdentifiers = item.volumeInfo.industryIdentifiers;
 
-                industryIdentifiers.forEach((identifier) => {
-                    if (identifier.type === 'ISBN_13' || identifier.type === 'ISBN_10') {
-                        if (identifier.type === 'ISBN_13') {
-                            isbn13 = identifier.identifier;
-                        }
+                // Find the first item who has correct ISBN
+                const rightIdentifier = industryIdentifiers.find((identifier) =>
+                    identifier.type === 'ISBN_13' && validISBN13.test(identifier.identifier) ||
+                    identifier.type === 'ISBN_10' && validISBN10.test(identifier.identifier));
 
-                        if (identifier.type === 'ISBN_10') {
-                            isbn10 = identifier.identifier;
-                        }
+                if (rightIdentifier) {
+                    return item
+                }
+            });
+
+            foundBook.volumeInfo.industryIdentifiers.forEach((identifier) => {
+                if (identifier.type === 'ISBN_13' || identifier.type === 'ISBN_10') {
+                    if (identifier.type === 'ISBN_13') {
+                        isbn13 = identifier.identifier;
                     }
-                });
 
-                return item;
+                    if (identifier.type === 'ISBN_10') {
+                        isbn10 = identifier.identifier;
+                    }
+                }
             });
 
             book = {
@@ -66,7 +72,6 @@ const google = {
                 } else {
                     debug('small cover :');
                 }
-
                 debug(googleCover);
 
                 book.cover = googleCover;
@@ -82,7 +87,6 @@ const google = {
 
     async findBookByKeyword(word, limit, startIndex) {
         const url = `https://www.googleapis.com/books/v1/volumes?q=${word}&orderBy=relevance&printType=books&maxResults=${limit}&startIndex=${startIndex}&printType=books&langRestrict=fr`;
-
         const response = await fetch(url);
         const json = await response.json();
 
