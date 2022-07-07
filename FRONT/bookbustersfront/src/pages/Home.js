@@ -4,7 +4,7 @@ import "../styles/Home.scss";
 
 import Header from "../components/Header/Header";
 import SignButtons from "../components/SignButtons/SignButtons";
-import Books from "../components/Books/Books";
+import BookLists from '../components/BookLists';
 import WelcomeBox from "../components/WelcomeBox/WelcomeBox";
 import Buttons from "../components/Button/Button";
 
@@ -14,7 +14,7 @@ const Home = () => {
       <Header />
       <WelcomeBox />
       <Buttons />
-      <Books />
+      <BookLists type='home' />
       <SignButtons />
     </>
   );

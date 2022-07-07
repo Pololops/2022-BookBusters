@@ -16,10 +16,8 @@ import ScanPage from "../../pages/ScanPage";
 import Error from "../../pages/Error";
 import Account from "../../pages/Account";
 import Credits from "../../pages/Credits";
-import Favorites from "../../pages/Favorites";
-import Library from "../../pages/Library";
+import UserLists from '../../pages/UserLists';
 import Contact from "../../pages/Contact";
-import MyAlerts from "../../pages/MyAlerts";
 import SignInSide from "../../pages/SignIn";
 import SignUp from "../../pages/SignUp";
 // import ForgotPassword from "../ForgotPassword/ForgotPassword";
@@ -68,64 +66,64 @@ themeOptions = responsiveFontSizes(themeOptions);
 
 function App() {
   return (
-    <ThemeProvider theme={themeOptions}>
-      <CssBaseline />
-      <BrowserRouter>
-        <AuthProvider>
-          <AlertProvider>
-            <BookProvider>
-              <DonatorProvider>
-                <Routes>
-                  {/* Routes toujours accessibles */}
-                  <Route path="/" element={<Home />} />
-                  <Route path="*" element={<Error />} />
-                  <Route path="/Credits" element={<Credits />} />
-                  <Route path="/Contact" element={<Contact />} />
-                  <Route path="/AroundMe" element={<AroundMe />} />
-                  <Route path="/SearchResults" element={<SearchResults />} />
-                  <Route
-                    path="/DonationRenewing"
-                    element={<DonationRenewing />}
-                  />
-                  {/* Routes avec JWT*/}
-                  <Route
-                    element={
-                      <AuthenticatedRoute
-                        redirect="/SignIn"
-                        connectedOnly={true}
-                      />
-                    }
-                  >
-                    <Route path="/Account" element={<Account />} />
-                    <Route path="/scan" element={<ScanPage />} />
-                    <Route path="/myAlerts" element={<MyAlerts />} />
-                    <Route path="/Favorites" element={<Favorites />} />
-                    <Route path="/Library" element={<Library />} />
-                    <Route
-                      path="/ContactFormDonation"
-                      element={<ContactFormDonation />}
-                    />
-                  </Route>
-                  {/* Routes SANS JWT*/}
-                  <Route
-                    element={
-                      <AuthenticatedRoute redirect="/" connectedOnly={false} />
-                    }
-                  >
-                    {/* <Route path="/ForgotPassword" element={<ForgotPassword />} />*/}
-                    <Route path="/SignIn" element={<SignInSide />} />
-                    <Route path="/SignUp" element={<SignUp />} />
-                  </Route>
-                </Routes>
+		<ThemeProvider theme={themeOptions}>
+			<CssBaseline />
+			<BrowserRouter>
+				<AuthProvider>
+					<AlertProvider>
+						<BookProvider>
+							<DonatorProvider>
+								<Routes>
+									{/* Routes toujours accessibles */}
+									<Route path="/" element={<Home />} />
+									<Route path="*" element={<Error />} />
+									<Route path="/Credits" element={<Credits />} />
+									<Route path="/Contact" element={<Contact />} />
+									<Route path="/AroundMe" element={<AroundMe />} />
+									<Route path="/SearchResults" element={<SearchResults />} />
+									<Route
+										path="/DonationRenewing"
+										element={<DonationRenewing />}
+									/>
+									{/* Routes avec JWT*/}
+									<Route
+										element={
+											<AuthenticatedRoute
+												redirect="/SignIn"
+												connectedOnly={true}
+											/>
+										}
+									>
+										<Route path="/Account" element={<Account />} />
+										<Route path="/scan" element={<ScanPage />} />
+										<Route path="/myAlerts" element={<UserLists list="alert" />} />
+										<Route path="/Favorites" element={<UserLists list="favorite" />} />
+										<Route path="/Library" element={<UserLists list="library" />} />
+										<Route
+											path="/ContactFormDonation"
+											element={<ContactFormDonation />}
+										/>
+									</Route>
+									{/* Routes SANS JWT*/}
+									<Route
+										element={
+											<AuthenticatedRoute redirect="/" connectedOnly={false} />
+										}
+									>
+										{/* <Route path="/ForgotPassword" element={<ForgotPassword />} />*/}
+										<Route path="/SignIn" element={<SignInSide />} />
+										<Route path="/SignUp" element={<SignUp />} />
+									</Route>
+								</Routes>
 
-                <Alert />
-              </DonatorProvider>
-            </BookProvider>
-          </AlertProvider>
-        </AuthProvider>
-      </BrowserRouter>
-    </ThemeProvider>
-  );
+								<Alert />
+							</DonatorProvider>
+						</BookProvider>
+					</AlertProvider>
+				</AuthProvider>
+			</BrowserRouter>
+		</ThemeProvider>
+	);
 }
 
 export default App;

@@ -32,7 +32,7 @@ module.exports = {
         }
 
         const books = await bookReformatter.reformat(lists);
-       return res.json({"books":books});
+       return res.json(books);
     },
 
     /**
@@ -60,7 +60,7 @@ module.exports = {
         }
 
         const books = await bookReformatter.reformat(favorites);
-        return res.json({"books":books});
+        return res.json(books);
     },
 
     /**
@@ -89,7 +89,7 @@ module.exports = {
         }
 
         const books = await bookReformatter.reformat(lists);
-        return res.json({"books":books});
+        return res.json(books);
     },
     async updateDonationDate(req, res) {
         const id = jwt.verify(req.params.token, process.env.SECRET_TOKEN_KEY);
