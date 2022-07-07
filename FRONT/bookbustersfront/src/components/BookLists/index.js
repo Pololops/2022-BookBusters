@@ -10,13 +10,15 @@ import Spinner from '../Spinner/Spinner';
 
 export default function BookLists({ list }) {
 	const [data, setData] = useState([]);
-	const [newData, setNewData] = useState([]);
+	const [moreData, setMoreData] = useState([]);
 	const [pageList, setPageList] = useState(0);
 	const { connected } = useContext(authContext);
 	const [isLoading, setisLoading] = useState(true);
+	const [isLoadingMore, setisLoadingMore] = useState(false);
 
-	async function handleClick() {
-		setPageList((prevPageList) => prevPageList + 1);
+	async function getMoreData() {
+		setisLoadingMore(true);
+		await getBooks(setMoreData, setisLoadingMore, list, pageList + 1);
 	}
 
 	useEffect(() => {
@@ -26,19 +28,15 @@ export default function BookLists({ list }) {
 	}, [list, connected]);
 
 	useEffect(() => {
-		console.log('page : ', pageList);
-		if (pageList > 0) {
-			getBooks(setNewData, setisLoading, list, pageList);
+		if (moreData.length > 0) {
+			setPageList((prevPageList) => prevPageList + 1);
+			setData((prevData) => [...prevData, ...moreData]);
 		}
+	}, [moreData]);
+
+	useEffect(() => {
+		console.log('pageList : ', pageList);
 	}, [pageList]);
-
-	useEffect(() => {
-		setData((prevData) => [...prevData, ...newData]);
-	}, [newData]);
-
-	useEffect(() => {
-		console.log('data : ', data);
-	}, [data]);
 
 	return (
 		<Box
@@ -58,8 +56,8 @@ export default function BookLists({ list }) {
 			) : (
 				<Spinner />
 			)}
-			{!isLoading && data.length > 9 + 10 * pageList && (
-				<MoreBooks pageList={pageList} handleClick={handleClick} />
+			{data && data.length > 9 + 10 * pageList && (
+				<MoreBooks onClick={getMoreData} isLoading={isLoadingMore} />
 			)}
 			<BookDetailModal />
 		</Box>

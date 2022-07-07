@@ -3,11 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Spinner from '../Spinner/Spinner';
 
-export default function MoreBooks({ handleClick }) {
+export default function MoreBooks({ onClick, isLoading }) {
 	return (
 		<Button
-			onClick={handleClick}
+			onClick={onClick}
 			sx={{
 				alignItems: 'flex-start',
 			}}
@@ -31,8 +32,8 @@ export default function MoreBooks({ handleClick }) {
 						justifyContent: 'center',
 					}}
 				>
-					<Typography gutterBottom sx={{ fontSize: '4em' }} component="div">
-						+
+					<Typography gutterBottom sx={{ fontSize: '5em' }} component="div">
+						{!isLoading ? '+' : <Spinner />}
 					</Typography>
 				</CardContent>
 			</Card>
@@ -41,5 +42,6 @@ export default function MoreBooks({ handleClick }) {
 }
 
 MoreBooks.propTypes = {
-	handleClick: PropTypes.func.isRequired,
+	onClick: PropTypes.func.isRequired,
+	isLoading: PropTypes.bool.isRequired,
 };
