@@ -43,8 +43,7 @@ export const usersAroundMe = (
 		});
 };
 
-export const getBooks = async (setData, setisLoading, list) => {
-	setisLoading(true);
+export const getBooks = async (setData, setisLoading, list, page=0) => {
 	const payload = payloadDecode();
 	const config = {
 		headers: {
@@ -54,9 +53,9 @@ export const getBooks = async (setData, setisLoading, list) => {
 
 	let requestUrl;
 	if (list === 'home') {
-		requestUrl = '/v1/book';
+		requestUrl = `/v1/book?page=${page}`;
 	} else {
-		requestUrl = `/v1/user/${payload.userId}/${list}`;
+		requestUrl = `/v1/user/${payload.userId}/${list}?page=${page}`;
 	}
 
 	await axios

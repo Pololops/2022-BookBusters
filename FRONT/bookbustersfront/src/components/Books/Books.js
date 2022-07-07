@@ -18,7 +18,6 @@ function Books() {
   }, []);
 
   return (
-    <>
       <Box
         sx={{
           display: "flex",
@@ -42,7 +41,6 @@ function Books() {
         )}
         <BookDetailModal />
       </Box>
-    </>
   );
 }
 
