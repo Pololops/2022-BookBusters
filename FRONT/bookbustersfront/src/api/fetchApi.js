@@ -43,41 +43,27 @@ export const usersAroundMe = (
 		});
 };
 
-export const latestAddition = async (setData, setisLoading) => {
-	setisLoading(true);
-	try {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-			},
-		};
-		const Books = await axios
-			.get('/v1/book', config)
-			.then((res) => setData(res.data))
-			.finally(() => setisLoading(false));
-		return Books;
-	} catch (error) {
-		console.log(error);
-	}
-};
-
 export const getBooks = async (setData, setisLoading, list) => {
 	setisLoading(true);
-	try {
-		const payload = payloadDecode();
-		const config = {
-			headers: {
-				Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-			},
-		};
-		const Books = await axios
-			.get(`/v1/user/${payload.userId}/${list}`, config)
-			.then((res) => setData(res.data))
-			.finally(() => setisLoading(false));
-		return Books;
-	} catch (error) {
-		console.log(error);
+	const payload = payloadDecode();
+	const config = {
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+		},
+	};
+
+	let requestUrl;
+	if (list === 'home') {
+		requestUrl = '/v1/book';
+	} else {
+		requestUrl = `/v1/user/${payload.userId}/${list}`;
 	}
+
+	await axios
+		.get(requestUrl, config)
+		.then((res) => setData(res.data))
+		.catch((error) => console.log(error))
+		.finally(() => setisLoading(false));
 };
 
 export const registerUser = (
