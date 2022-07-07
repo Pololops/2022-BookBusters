@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Box } from '@mui/system';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import authContext from '../../contexts/AuthContext';
 import Book from '../Book/Book';
 import { getBooks } from '../../api/fetchApi';
 import BookDetailModal from '../BookDetailModal/BookDetailModal';
@@ -8,12 +9,12 @@ import Spinner from '../Spinner/Spinner';
 
 export default function BookLists({ list }) {
 	const [data, setData] = useState([]);
-	const [user] = useState([]);
+  const { connected } = useContext(authContext);
 	const [isLoading, setisLoading] = useState(true);
 
 	useEffect(() => {
 		getBooks(setData, setisLoading, list);
-	}, [list, user]);
+	}, [list, connected]);
 
 	return (
 		<>
@@ -30,7 +31,7 @@ export default function BookLists({ list }) {
 				{!isLoading ? (
 					data.map((book, index) => (
 						<Book
-							key={`je-suis-unique-${index}`}
+							key={book.id}
 							book={book}
 							users={book.donors}
 						/>
