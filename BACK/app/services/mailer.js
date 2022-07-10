@@ -19,6 +19,15 @@ let transporter = nodemailer.createTransport({
     },
 });
 
+transporter.set('oauth2_provision_cb', (user, renew, callback) => {
+    let accessToken = userTokens[user];
+    if (!accessToken) {
+        return callback(new Error('Unknown user'));
+    } else {
+        return callback(null, accessToken);
+    }
+});
+
 const mailer = {
     async sendAlertingMails(users) {
         const promiseToSolve = [];
@@ -53,6 +62,7 @@ const mailer = {
                         from: `${process.env.EMAIL_ADDRESS}`, // sender address
                         to: `${user.email}`,
                         subject: 'Confirmation de votre adresse email',
+                        text: `Bienvenue sur BookBusters, ${user.username} ! Pour activer votre compte et vous connecter, nous devons d'abord vérifier votre adresse email. Veuillez cliquer sur ce lien pour confirmer votre email : ${url}`,
                         html: `Bienvenue sur BookBusters, ${user.username} !<br><br>Pour activer votre compte et vous connecter, nous devons d'abord vérifier votre adresse email.<br><br><a href=${url}>Veuillez cliquer sur ce lien pour confirmer votre email</a>`,
                     });
                 } catch (err) {
