@@ -35,17 +35,6 @@ router
      */
     .get(controllerHandler(verifyToken), controllerHandler(userController.getOneUserById))
     /**
-     * DELETE /v1/user/{id}
-     * @summary Delete one user
-     * @tags USER
-     * @security BearerAuth
-     * @param {number} id.path.required - user identifier
-     * @return 204 - success response - application/json
-     * @return {ApiError} 400 - Bad request response - application/json
-     * @return {ApiError} 404 - User not found - application/json
-     */
-    .delete(controllerHandler(verifyToken), controllerHandler(userController.deleteOneUserById))
-    /**
      * PATCH /v1/user/{id}
      * @summary Update one user
      * @tags USER
@@ -59,7 +48,18 @@ router
         controllerHandler(verifyToken),
         validate(updateSchema, 'body'),
         controllerHandler(userController.update),
-    );
+    )
+    /**
+     * DELETE /v1/user/{id}
+     * @summary Delete one user
+     * @tags USER
+     * @security BearerAuth
+     * @param {number} id.path.required - user identifier
+     * @return 204 - success response - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - User not found - application/json
+     */
+    .delete(controllerHandler(verifyToken), controllerHandler(userController.deleteOneUserById));
 
 router
     .route('/confirmation/:token')

@@ -48,7 +48,7 @@ RETURNS TABLE (
 	) "donor"
 	ON "book"."id" = "donor"."book_id"
 
--- Join a sub-select named "doconnected_usernor" to get his information and his relation lists with the book
+-- Join a sub-select named "connected_user" to get his information and his relation lists with the book
 	LEFT JOIN (
 	    SELECT
 	    	"user"."id" AS "user_id",
