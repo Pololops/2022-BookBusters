@@ -74,6 +74,7 @@ module.exports = {
             const salt = await bcrypt.genSalt(10);
             const encryptedPassword = await bcrypt.hash(req.body.password, salt);
             req.body.password = encryptedPassword;
+
             // transformation of the commune code to a GPS coordonates via an external API
             debug('location:', req.body.communeCode);
             const data = await city.findLocationByCommuneCode(req.body.communeCode);
@@ -82,7 +83,9 @@ module.exports = {
             const communeName = data[1];
             req.body.location = location;
             req.body.communeName = communeName;
+
             debug('req.body:', req.body);
+            
             const savedUser = await userDataMapper.insert(req.body);
 
             await mailer.confirmationMail(savedUser);
