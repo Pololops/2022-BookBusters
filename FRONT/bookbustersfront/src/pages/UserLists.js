@@ -18,10 +18,17 @@ export default function UserLists({ list }) {
 				}}
 			>
 				<Typography variant="h4" sx={{ paddingTop: '25px' }}>
-					Bienvenue dans vos favoris
+					Bienvenue dans {list === 'library' && 'votre bibliothèque'}
+					{list === 'favorite' && 'vos favoris'}
+					{list === 'alert' && 'vos alertes'}
 				</Typography>
 				<Typography variant="body1" sx={{ padding: '15px' }}>
-					Ajoutez en favoris vos livres préféres.
+					{list === 'library' &&
+						"Cliquez sur l'un de vos livres pour indiquer aux autres utilisateurs que vous le donnez."}
+					{list === 'favorite' &&
+						'Ajoutez vos livres préférés dans vos favoris.'}
+					{list === 'alert' &&
+						"BookBusters vous alertera par email dès que l'un de ces livres sera donné par un de nos utilisateurs."}
 				</Typography>
 			</Box>
 			<ButtonsLibrary sx={{ textAlign: 'center' }} />
