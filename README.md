@@ -13,7 +13,7 @@ The repository contains back-end and front-and parts :
 
 ### Back-end
 
-- In the [BACK](./BACK) folder, install the node globally and the NPM dependencies
+- In the [BACK](./BACK) folder, install Node globally and the NPM dependencies
 - Create a PostgreSQL database, install [sqitch](https://sqitch.org), configure sqitch configuration in a file named sqitch.conf by copying the sample file.
 - Then deploy the database structure with this sqitch command:
  ```sh
